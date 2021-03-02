@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>TODO LIST</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <div class="main-box">
+      <div class="wrapper" id="wrapper">
+         <div class="todo-popup todo-popup_disable" id="popup-content"></div>
+         <div class="input-wrapper input-wrapper_disable" id="input-wrapper">
+            <textarea class="todo-input" id="input-value" name="content" cols="30" rows="10"></textarea>
+            <div class="input-tips-wrapper">
+               <span class="close-desc">Hit 'Enter' or 'Tab' to write the task</span>
+               <button class="clear-btn" id="clear">Clear</button>
+               <button class="create-new-task" id="createButton">Create a task</button>
+            </div>
+         </div>
+         <div class="todo" id="todo">
+            <div class="todo-header">
+               <button class="delete-all_disable" id="delete-all-tasks">Delete all</button>
+               <div class="completed-tasks"><span>Completed tasks:&nbsp;</span><span id="completedTasks">0</span></div>
+               <button class="add-item" id="addBtn">Add new item</button>
+            </div>
+            <div class="todo-content">
+               <ul class="todo-list" id="todo-list"></ul>
+            </div>
+         </div>
+      </div>
+      <div id="doneTaskWrapper">
+         <h1 id="completedTasksTitle">Your completed tasks</h1>
+
+         <div id="doneTaskContent">
+            <ul class="done-task-ul" id="doneTaskUl"></ul>
+         </div>
+      </div>
+   </div>
+
+   <script src="app.js" charset="utf-8"></script>
+</body>
+
+</html>
