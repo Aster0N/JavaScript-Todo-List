@@ -151,13 +151,13 @@ button.delete-all:hover {
 
 .todo-popup_anable,
 .input-wrapper_anable{
-   visibility: visible !important;
-   opacity: 100 !important;
+   visibility: visible;
+   opacity: 100;
 }
 .todo-popup_disable,
 .input-wrapper_disable {
-   visibility: hidden !important;
-   opacity: 0 !important;
+   visibility: hidden;
+   opacity: 0;
 }
 
 .input-wrapper {
