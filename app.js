@@ -29,21 +29,23 @@ function create() {
 
    mainBox.style.backgroundColor = 'rgba(83, 92, 104, 1.0)';
 
-   var newItem = document.createElement("li");
-   newItem.classList.add('new-li');
-   newItem.innerHTML = inputValue.value;
-   todoList.appendChild(newItem);
+   if (inputValue.value != '') {
+      var newItem = document.createElement("li");
+      newItem.classList.add('new-li');
+      newItem.innerHTML = inputValue.value;
+      todoList.appendChild(newItem);
 
-   var deleteButton = document.createElement('button');
-   var doneButton = document.createElement('button');
+      var deleteButton = document.createElement('button');
+      var doneButton = document.createElement('button');
 
-   deleteButton.classList.add('delete-task-btn');
-   doneButton.classList.add('done-task-btn');
-   newItem.appendChild(deleteButton);
-   newItem.appendChild(doneButton);
+      deleteButton.classList.add('delete-task-btn');
+      doneButton.classList.add('done-task-btn');
+      newItem.appendChild(deleteButton);
+      newItem.appendChild(doneButton);
 
-   itemArray.push(newItem);
-   inputValue.value;
+      itemArray.push(newItem);
+      inputValue.value;
+   }
 
    // click the buttons (delete, done)
    deleteButton.onclick = function () {
