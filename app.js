@@ -43,6 +43,7 @@ function create() {
    newItem.appendChild(doneButton);
 
    itemArray.push(newItem);
+   inputValue.value;
 
    // click the buttons (delete, done)
    deleteButton.onclick = function () {
