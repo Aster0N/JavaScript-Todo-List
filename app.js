@@ -13,15 +13,10 @@ let itemsArray = [];
 let completedTasksCount = 0;
 
 
-function deleteAllTasks(todoList, itemsArray, newItem) {
-	if (todoList.childNodes.length) {
-		newItem.classList.add('item-deleted');
-		todoList.removeChild(newItem)
-	}
-	if (itemsArray.length) {
-		itemsArray = itemsArray.splice(0, -1);
-	}
-};
+deleteAllTasksBtn.addEventListener('click', () => {
+	itemsArray = [];
+	todoList.textContent = '';
+})
 
 function create() {
 	closeTrigger.classList.toggle('todo-popup_disable');
@@ -82,7 +77,7 @@ function create() {
 		deleteAllTasksBtn.classList.remove('delete-all');
 		deleteAllTasksBtn.classList.add('delete-all_disable');
 	}
-	deleteAllTasksBtn.addEventListener('click', () => deleteAllTasks(todoList, itemsArray, newItem))
+	// deleteAllTasksBtn.addEventListener('click', deleteAllTasks())
 };
 
 function moveToCompletedList(doneButton, newItem) {
