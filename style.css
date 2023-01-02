@@ -281,16 +281,6 @@ button.delete-all:hover {
 	background-color: #f1c40f;
 }
 
-/* deleted item */
-
-.item-deleted {
-	display: none;
-}
-
-.item-done-moved {
-	display: block;
-}
-
 #doneTaskWrapper {
 	display: none;
 }

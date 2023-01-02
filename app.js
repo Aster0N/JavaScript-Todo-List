@@ -87,6 +87,9 @@ function moveToCompletedList(doneButton, newItem) {
 	const doneTaskContent = document.querySelector('#doneTaskContent');
 	const completedTitle = document.querySelector('#completedTasksTitle');
 
+	newItem.querySelector(".delete-task-btn").style.display = "none";
+	newItem.removeChild(doneButton);
+
 	const recompleteTaskBtn = document.createElement('button');
 	recompleteTaskBtn.classList.add('remove-btn');
 	newItem.appendChild(recompleteTaskBtn);
@@ -97,12 +100,12 @@ function moveToCompletedList(doneButton, newItem) {
 	doneTaskContent.classList.add('done-task-content');
 	completedTitle.classList.add('completed-tasks-title');
 
-	doneTaskUl.appendChild(doneButton.parentNode);
-	doneButton.parentNode.removeChild(doneButton);
+	doneTaskUl.appendChild(newItem);
 
 	// recomplete task
 	recompleteTaskBtn.onclick = function () {
 		const removeItem = recompleteTaskBtn.parentNode;
+		removeItem.querySelector(".delete-task-btn").style.display = "block";
 		doneTaskUl.removeChild(removeItem);
 		todoList.appendChild(removeItem);
 
