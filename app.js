@@ -19,8 +19,10 @@ deleteAllTasksBtn.addEventListener('click', () => {
 })
 
 function create() {
-	closeTrigger.classList.toggle('todo-popup_disable');
-	inputWrapper.classList.toggle('input-wrapper_disable');
+	closeTrigger.classList.remove('todo-popup_enable');
+	inputWrapper.classList.remove('input-wrapper_enable');
+	closeTrigger.classList.add('todo-popup_disable');
+	inputWrapper.classList.add('input-wrapper_disable');
 
 	mainBox.style.backgroundColor = 'rgba(83, 92, 104, 1.0)';
 
@@ -77,7 +79,6 @@ function create() {
 		deleteAllTasksBtn.classList.remove('delete-all');
 		deleteAllTasksBtn.classList.add('delete-all_disable');
 	}
-	// deleteAllTasksBtn.addEventListener('click', deleteAllTasks())
 };
 
 function moveToCompletedList(doneButton, newItem) {
@@ -91,9 +92,8 @@ function moveToCompletedList(doneButton, newItem) {
 	newItem.appendChild(recompleteTaskBtn);
 	newItem.style.cssText = 'padding-right: 70px;';
 	doneTaskUl.appendChild(recompleteTaskBtn.parentNode);
-	console.log(recompleteTaskBtn.parentNode)
 
-	doneTaskWrapper.classList.add('done-task-wrapper_anable');
+	doneTaskWrapper.classList.add('done-task-wrapper_enable');
 	doneTaskContent.classList.add('done-task-content');
 	completedTitle.classList.add('completed-tasks-title');
 
@@ -117,23 +117,26 @@ function moveToCompletedList(doneButton, newItem) {
 addNewItem.onclick = function () {
 	window.scrollTo(0, 0);
 	mainBox.style.backgroundColor = '#222f3e';
-	closeTrigger.classList.toggle('todo-popup_anable');
-	inputWrapper.classList.toggle('input-wrapper_anable');
 	closeTrigger.classList.remove('todo-popup_disable');
 	inputWrapper.classList.remove('input-wrapper_disable');
+	closeTrigger.classList.toggle('todo-popup_enable');
+	inputWrapper.classList.toggle('input-wrapper_enable');
 };
 
 document.addEventListener("keydown", (event) => {
-	if (event.keyCode == 13 || event.keyCode == 9) {
+	const isPopupOpen = closeTrigger.classList.contains("todo-popup_enable")
+	if ((event.keyCode == 13 || event.keyCode == 9) && isPopupOpen) {
 		create();
 	};
 });
 
-createButton.onclick = () => { create(); };
-clearBtn.onclick = () => { input.value = '' }
+createButton.onclick = () => create();
+clearBtn.onclick = () => {
+	input.value = '';
+}
 
 closeTrigger.onclick = function () {
 	mainBox.style.backgroundColor = 'rgba(83, 92, 104,1.0)';
-	closeTrigger.classList.toggle('todo-popup_disable');
-	inputWrapper.classList.toggle('input-wrapper_disable');
+	closeTrigger.classList.remove('todo-popup_enable');
+	inputWrapper.classList.remove('input-wrapper_enable');
 };
