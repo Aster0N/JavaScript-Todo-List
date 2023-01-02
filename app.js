@@ -49,38 +49,29 @@ function create() {
 		const deletedItem = deleteButton.parentNode;
 		const deleteItemIndex = itemsArray.indexOf(newItem);
 		itemsArray.splice(deleteItemIndex, 1);
-		deletedItem.classList.add('item-deleted');
 		todoList.removeChild(deletedItem);
 	};
 
 	doneButton.onclick = function () {
-		const element = document.getElementById('scrollDownIcon');
-		// plus done index
-		if (typeof (element) != 'undefined' && element != null) {
-			doneButton.parentNode.classList.add('item-done');
-			if (completedTasksCount >= 0) {
-				completedTasksCount = completedTasksCount + 1;
-				completedTasks.innerHTML = completedTasksCount;
-			}
-		} else {
-			const scrollDownIcon = document.createElement('a');
+		let scrollDownIcon = document.querySelector('#scrollDownIcon');
+
+		if (typeof (scrollDownIcon) == 'undefined' || scrollDownIcon == null) {
+			scrollDownIcon = document.createElement('a');
 			scrollDownIcon.setAttribute('id', 'scrollDownIcon');
+			scrollDownIcon.setAttribute('href', '#doneTaskWrapper');
+			scrollDownIcon.classList.add('scroll-down-icon', 'scroll-down-icon_active');
 
 			const scrollIcon = document.createElement('img');
 			scrollIcon.setAttribute('src', './images/down-arrow.svg');
-			scrollDownIcon.appendChild(scrollIcon);
-			scrollDownIcon.setAttribute('href', '#doneTaskWrapper');
-			wrapper.appendChild(scrollDownIcon);
-			scrollDownIcon.classList.add('scroll-down-icon', 'scroll-down-icon_active');
 			scrollIcon.classList.add('scroll-icon');
-
-			doneButton.parentNode.classList.add('item-done');
-			if (completedTasksCount >= 0) {
-				completedTasksCount = completedTasksCount + 1;
-				completedTasks.innerHTML = completedTasksCount;
-			}
+			scrollDownIcon.appendChild(scrollIcon);
+			wrapper.appendChild(scrollDownIcon);
 		};
-		doneTask(doneButton, newItem, todoList);
+
+		completedTasksCount++;
+		completedTasks.innerHTML = completedTasksCount;
+
+		moveToCompletedList(doneButton, newItem);
 	};
 
 	// delete all tasts 
@@ -94,41 +85,37 @@ function create() {
 	deleteAllTasksBtn.addEventListener('click', () => deleteAllTasks(todoList, itemsArray, newItem))
 };
 
-function doneTask(doneButton, newItem, todoList) {
+function moveToCompletedList(doneButton, newItem) {
 	const doneTaskWrapper = document.querySelector('#doneTaskWrapper');
 	const doneTaskUl = document.querySelector('#doneTaskUl');
 	const doneTaskContent = document.querySelector('#doneTaskContent');
 	const completedTitle = document.querySelector('#completedTasksTitle');
 
-	// create remove button 
-	const removeButton = document.createElement('button');
-	removeButton.classList.add('remove-btn');
-	newItem.appendChild(removeButton);
+	const recompleteTaskBtn = document.createElement('button');
+	recompleteTaskBtn.classList.add('remove-btn');
+	newItem.appendChild(recompleteTaskBtn);
 	newItem.style.cssText = 'padding-right: 70px;';
-	doneTaskUl.appendChild(removeButton.parentNode);
+	doneTaskUl.appendChild(recompleteTaskBtn.parentNode);
+	console.log(recompleteTaskBtn.parentNode)
 
 	doneTaskWrapper.classList.add('done-task-wrapper_anable');
 	doneTaskContent.classList.add('done-task-content');
-
 	completedTitle.classList.add('completed-tasks-title');
 
-	doneButton.parentNode.classList.remove('item-done');
 	doneTaskUl.appendChild(doneButton.parentNode);
 	doneButton.parentNode.removeChild(doneButton);
 
-	// remove
-	removeButton.onclick = function () {
-		const removeItem = removeButton.parentNode;
+	// recomplete task
+	recompleteTaskBtn.onclick = function () {
+		const removeItem = recompleteTaskBtn.parentNode;
 		doneTaskUl.removeChild(removeItem);
 		todoList.appendChild(removeItem);
 
-		removeItem.removeChild(removeButton);
+		removeItem.removeChild(recompleteTaskBtn);
 		removeItem.appendChild(doneButton);
 
-		if (completedTasksCount >= 0) {
-			completedTasksCount = completedTasksCount - 1;
-			completedTasks.innerHTML = completedTasksCount;
-		};
+		completedTasksCount--;
+		completedTasks.innerHTML = completedTasksCount;
 	};
 };
 
